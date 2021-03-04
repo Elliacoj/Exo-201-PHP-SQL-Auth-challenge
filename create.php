@@ -37,7 +37,7 @@ if(isset($_SESSION['pseudo'], $_SESSION['password'])) { ?>
             $search->bindParam(':available', $available);
 
             if($search->execute()) {
-                header("location: create.php?post=ok");
+                header("location: read.php?post=ok");
             }
             else {
                 header("location: create.php?post=notOk");
@@ -46,10 +46,7 @@ if(isset($_SESSION['pseudo'], $_SESSION['password'])) { ?>
 
     }
 
-    if(isset($_GET['post']) && $_GET['post'] == "ok" ) {
-        echo "<div style='background-color: greenyellow; font-weight: bold; text-align: center;'>Base de données mise à jour</div>";
-    }
-    elseif (isset($_GET['post']) && $_GET['post'] == "notOk" ) {
+    if (isset($_GET['post']) && $_GET['post'] == "notOk" ) {
         echo "<div style='background-color: red; font-weight: bold; text-align: center;'>Echec de la mise à jour</div>";
     }
 ?>
@@ -82,6 +79,10 @@ if(isset($_SESSION['pseudo'], $_SESSION['password'])) { ?>
             </select>
             <input type="submit">
         </div>
+    </form>
+
+    <form action="read.php" method="POST">
+        <input type="submit" value="Annuler">
     </form>
 </body>
 </html>

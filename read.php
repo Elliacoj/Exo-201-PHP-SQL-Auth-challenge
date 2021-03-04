@@ -13,14 +13,40 @@ require_once 'include.php';
     <title>Document</title>
 </head>
 <body>
+<?php if(isset($_SESSION['pseudo'], $_SESSION['password'])) { ?>
+    <span>Bienvenu <? echo '' . $_SESSION['pseudo'] . ''; ?></span>
+    <form action="logout.php" method="post">
+        <button type="submit" name="button" id="buttonOff">Se déconnecter</button>
+        </div>
+    </form>
+
+<?php }
+    else {?>
+
+        <form action="createUser.php" method="post">
+            <button type="submit" name="button" id="buttonOff">Création de compte</button>
+            </div>
+        </form>
+        <form action="login.php" method="post">
+            <button type="submit" name="button" id="buttonOff">Se connecter</button>
+            </div>
+        </form>
 
 <?php
+    }
+
     if(isset($_GET['post']) && $_GET['post'] == "ok" ) {
         echo "<div style='background-color: greenyellow; font-weight: bold; text-align: center;'>Base de données mise à jour</div>";
     }
     elseif (isset($_GET['post']) && $_GET['post'] == "notOk" ) {
         echo "<div style='background-color: red; font-weight: bold; text-align: center;'>Echec de la mise à jour</div>";
-}
+    }
+    elseif (isset($_GET['post']) && $_GET['post'] == "off" ) {
+        echo "<div style='background-color: greenyellow; font-weight: bold; text-align: center;'>Vous vous êtes bien déconnecté</div>";
+    }
+    elseif (isset($_GET['post']) && $_GET['post'] == "create" ) {
+        echo "<div style='background-color: greenyellow; font-weight: bold; text-align: center;'>Votre compte a été créé, vous pouvez vous connecter</div>";
+    }
 
     $search = $db->prepare("SELECT * FROM hiking");
 
@@ -41,5 +67,10 @@ require_once 'include.php';
     }
     echo "</table>";
 ?>
+
+    <form action="create.php" method="post">
+        <button type="submit" name="button" id="buttonOff">Créer une nouvelle randonnée</button>
+        </div>
+    </form>
 </body>
 </html>

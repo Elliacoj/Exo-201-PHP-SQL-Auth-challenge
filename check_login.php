@@ -17,7 +17,7 @@ function checkpassword(string $username, string $userpassword) {
     if($state) {
         $passwordDb = $search->fetch();
 
-        if($passwordDb['password'] === $userpassword) {
+        if(password_verify($userpassword, $passwordDb['password'])) {
             $_SESSION['pseudo'] = $username;
             $_SESSION['password'] = $userpassword;
             header("location: read.php");
